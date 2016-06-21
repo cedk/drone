@@ -1,19 +1,20 @@
 package trypod
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"time"
-	"encoding/json"
 
 	"gopkg.in/yaml.v1"
 
-	"github.com/drone/drone/shared/model"
-	"github.com/drone/drone/shared/build/script"
 	"github.com/drone/drone/plugin/notify"
 	"github.com/drone/drone/plugin/notify/webhook"
+	"github.com/drone/drone/shared/build/script"
+	"github.com/drone/drone/shared/model"
 )
 
 type Trypod struct {
@@ -143,13 +144,19 @@ func (r *Trypod) GetScript(user *model.User, repo *model.Repo, hook *model.Hook)
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("http status not OK")
+	}
 	defer resp.Body.Close()
 	var yml []byte
 	yml, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
-	script, _ := script.ParseBuild(string(yml))
+	script, err := script.ParseBuild(string(yml))
+	if err != nil {
+		return nil, err
+	}
 	if script.Notifications == nil {
 		script.Notifications = &notify.Notification{}
 	}
