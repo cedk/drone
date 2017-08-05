@@ -489,6 +489,21 @@ var flags = []cli.Flag{
 		Name:   "coding-skip-verify",
 		Usage:  "coding skip ssl verification",
 	},
+	cli.BoolFlag{
+		EnvVar: "DRONE_TRYPOD",
+		Name:   "trypod",
+		Usage:  "trypod driver is enabled",
+	},
+	cli.StringFlag{
+		EnvVar: "DRONE_TRYPOD_URL",
+		Name:   "trypod-server",
+		Usage:  "trypod server address",
+	},
+	cli.StringFlag{
+		EnvVar: "DRONE_TRYPOD_TOKEN",
+		Name:   "trypod-token",
+		Usage:  "trypod server token",
+	},
 	cli.DurationFlag{
 		EnvVar: "DRONE_KEEPALIVE_MIN_TIME",
 		Name:   "keepalive-min-time",

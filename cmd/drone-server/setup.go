@@ -32,6 +32,7 @@ import (
 	"github.com/drone/drone/remote/gitlab"
 	"github.com/drone/drone/remote/gitlab3"
 	"github.com/drone/drone/remote/gogs"
+	"github.com/drone/drone/remote/trypod"
 	"github.com/drone/drone/server/web"
 	"github.com/drone/drone/store"
 	"github.com/drone/drone/store/datastore"
@@ -87,6 +88,8 @@ func SetupRemote(c *cli.Context) (remote.Remote, error) {
 		return setupGitea(c)
 	case c.Bool("coding"):
 		return setupCoding(c)
+	case c.Bool("trypod"):
+		return setupTrypod(c)
 	default:
 		return nil, fmt.Errorf("version control system not configured")
 	}
@@ -186,6 +189,14 @@ func setupCoding(c *cli.Context) (remote.Remote, error) {
 		Username:   c.String("coding-git-username"),
 		Password:   c.String("coding-git-password"),
 		SkipVerify: c.Bool("coding-skip-verify"),
+	})
+}
+
+// helper function to setup Trypod remote from the CLI arguments.
+func setupTrypod(c *cli.Context) (remote.Remote, error) {
+	return trypod.New(trypod.Opts{
+		URL:         c.String("trypod-server"),
+		Token:       c.String("trypod-token"),
 	})
 }
 
