@@ -55,7 +55,7 @@ func (c *ContainerService) create(conf *Config) (*Run, error) {
 
 // Start the container id
 func (c *ContainerService) Start(id string, conf *HostConfig) error {
-	return c.do("POST", fmt.Sprintf("/containers/%s/start", id), &conf, nil)
+	return c.do("POST", fmt.Sprintf("/containers/%s/start", id), nil, nil)
 }
 
 // Stop the container id
