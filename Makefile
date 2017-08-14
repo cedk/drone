@@ -25,8 +25,8 @@ test_postgres:
 build:
 	mkdir -p packaging/output
 	mkdir -p packaging/root/usr/local/bin
-	go build -o packaging/root/usr/local/bin/drone  -ldflags "-X main.revision $(SHA) -X main.version $(VERSION)" github.com/drone/drone/cli
-	go build -o packaging/root/usr/local/bin/droned -ldflags "-X main.revision $(SHA) -X main.version $(VERSION)" github.com/drone/drone/server
+	go build -o packaging/root/usr/local/bin/drone  -ldflags "-X main.revision=$(SHA) -X main.version=$(VERSION)" github.com/drone/drone/cli
+	go build -o packaging/root/usr/local/bin/droned -ldflags "-X main.revision=$(SHA) -X main.version=$(VERSION)" github.com/drone/drone/server
 
 install:
 	install -t /usr/local/bin packaging/root/usr/local/bin/drone
