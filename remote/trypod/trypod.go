@@ -264,5 +264,7 @@ func (t *Trypod) Hook(r *http.Request) (*model.Repo, *model.Build, error) {
 	build.Message = commit.Description
 	build.Author = commit.Author
 	build.Email = commit.Author
+	build.Avatar = commit.Avatar
+	build.Link = fmt.Sprintf("%s/rev/%s", commit.Repository, commit.Rev)
 	return repo, build, nil
 }

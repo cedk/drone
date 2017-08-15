@@ -16,6 +16,7 @@ type Repo struct {
 
 type Commit struct {
 	Author      string `json:"author"`
+	Avatar      string `json:"avatar"`
 	Repository  string `json:"repository"`
 	Owner       string `json:"owner"`
 	Name        string `json:"name"`
