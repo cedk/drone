@@ -15,11 +15,11 @@ import (
 )
 
 type engine struct {
-	client client.APIClient
+	client *client.Client
 }
 
 // New returns a new Docker Engine using the given client.
-func New(cli client.APIClient) backend.Engine {
+func New(cli *client.Client) backend.Engine {
 	return &engine{
 		client: cli,
 	}
@@ -181,6 +181,10 @@ func (e *engine) Destroy(conf *backend.Config) error {
 		e.client.NetworkRemove(noContext, network.Name)
 	}
 	return nil
+}
+
+func (e *engine) Close() error {
+	return e.client.Close()
 }
 
 var (

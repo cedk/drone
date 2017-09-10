@@ -202,6 +202,7 @@ func (r *runner) run(ctx context.Context) error {
 
 		return err
 	}
+	defer engine.Close()
 
 	ctx, cancel := context.WithTimeout(ctxmeta, timeout)
 	defer cancel()

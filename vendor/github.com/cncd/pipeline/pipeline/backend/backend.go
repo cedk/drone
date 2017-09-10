@@ -18,4 +18,6 @@ type Engine interface {
 	Tail(*Step) (io.ReadCloser, error)
 	// Destroy the pipeline environment.
 	Destroy(*Config) error
+	// Close engine
+	Close() error
 }
