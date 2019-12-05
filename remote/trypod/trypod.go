@@ -66,6 +66,7 @@ func (t *Trypod) Login(res http.ResponseWriter, req *http.Request) (*model.User,
 		Login: reply.UserName,
 		Token: reply.Token,
 		Email: reply.Address,
+		Avatar: reply.Avatar,
 	}, nil
 }
 

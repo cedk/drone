@@ -6,6 +6,7 @@ type User struct {
 	RealName string `json:"realname"`
 	Address  string `json:"address"`
 	Token    string `json:"token"`
+	Avatar   string `json:"avatar"`
 }
 
 type Repo struct {
